@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rock paper scissors</title>
+    <style>
+      body{
+        background-color: rgb(25, 25, 25);
+        color:white;
+        font-family: Arial;
+      }
+      .reset-score-button{
+        background-color: white;
+        border:none;
+        font-size: 15px;
+        padding:8px 15px;
+        cursor: pointer;
+        color:black;
+        border-radius: 0px;
+      }
+
+      .result{
+        font-size: 25px;
+        font-weight: bold;
+        margin-top: 50px;
+      }
+      .title{
+        font-size: 30px;
+        font-weight: bold;
+      }
+      .move-button{
+        background-color: rgb(25, 25, 25);
+        width:120px;
+        height:120px;
+        border: 3px solid white;
+        cursor:pointer;
+        border-radius: 60px;
+        padding: 20px;
+        margin-left: 0px;
+      }
+      button{
+        background-color: rgb(25, 25, 25);
+        color:white;
+        font-family: Arial;
+        border: 1px solid white;
+        border-radius: 5px;
+        padding: 10px;
+        margin-right: 10px;
+      }
+      .score{
+        margin-top:60px;
+      }
+      .move-icon{
+        height: 50px;
+      }
+
+    </style>
+  </head>
+  <body>
+    <center>
+    <p class="title">Rock Paper Scissors</p>
+    <button onclick="onclicks('rock')" class="move-button">
+      <img src="rock-emoji.png" class="move-icon">
+    </button>
+    
+    <button onclick="onclicks('paper')" class="move-button">
+      <img src="paper-emoji.png"class="move-icon">
+    </button>
+
+    <button onclick="onclicks('scissors')" class="move-button">
+      <img src="scissors-emoji.png" class="move-icon">
+    </button>
+    
+    <p class="js-result result"></p>
+    <p class="js-move"></p>
+    <p class="js-score score"></p>
+
+    <button
+      onclick="
+  score.wins = 0;
+  score.losses = 0;
+  score.ties = 0;
+  localStorage.removeItem('score');
+  document.querySelector('.js-score').
+  innerHTML = `Wins : ${score.wins} Loses : ${score.losses} Ties : ${score.ties}`;"
+    class="reset-score-button"
+    >
+      Reset Score
+    </button>
+  </center>
+    
+
+    <script>
+      
+      let score = JSON.parse(localStorage.getItem('score')) || {wins : 0,losses:0,ties:0};
+      localStorage.setItem('score',JSON.stringify(score));
+      
+
+      
+
+      function pickComputerMove() {
+        const moves = ["rock", "paper", "scissors"];
+        const randomIndex = Math.floor(Math.random() * 3);
+        
+        return moves[randomIndex];
+      }
+      function onclicks(um){
+        let res = '';
+        const cm = pickComputerMove()
+        if(cm === um){
+          score.ties++;
+          res = 'Tie';
+        }
+        else if(cm === 'rock'){
+          if (um === 'scissors'){
+            score.losses++;
+            res = 'you Lose';
+          }
+          else{
+            score.wins++;
+            res = 'you Win';
+          }
+        }
+        else if(cm === 'paper'){
+          if (um === 'rock'){
+            score.losses++;
+            res = 'you Lose';
+          }
+          else{
+            score.wins++;
+            res = 'you Win';
+          }
+        }
+        else if(cm === 'scissors'){
+          if (um === 'paper'){
+            score.losses++;
+            res = 'you Lose';
+          }
+          else{
+            score.wins++;
+            res = 'you Win';
+          }
+        }
+        document.querySelector('.js-move').
+        innerHTML = `You <img src="${um}-emoji.png" class="move-icon"> <img src="${cm}-emoji.png" class="move-icon">Computer`;
+        document.querySelector('.js-result').innerHTML=`${res}`;
+        document.querySelector('.js-score').innerHTML=`Wins : ${score.wins} Loses : ${score.losses} Ties : ${score.ties}`;
+        localStorage.setItem('score',JSON.stringify(score));
+      }
+      document.querySelector('.js-score').
+      innerHTML = `Wins : ${score.wins} Loses : ${score.losses} Ties : ${score.ties}`;
+      
+      console.log(JSON.parse(localStorage.getItem('score')));
+    </script>
+  </body>
+</html> 
