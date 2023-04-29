@@ -25,6 +25,8 @@ const todoList = JSON.parse(localStorage.getItem('todo')) || [];
           renderTodoList();
         });
       });
+    localStorage.setItem('todo',JSON.stringify(todoList));
+
   }
   
   document.querySelector('.js-add-todo-button')
