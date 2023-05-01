@@ -31,7 +31,7 @@ function signup(){
     let email = document.querySelector('.js-email').value;
     cred[`${name}`] = [pass, email];
     localStorage.setItem('cred', JSON.stringify(cred));
+    location.href="signin.html";
     alert('You are signed up!');
-    window.location.href='signin.html';
 
 }
