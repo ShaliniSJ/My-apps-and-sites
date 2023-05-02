@@ -10,15 +10,15 @@
 <body>
     <center>
     <div class="form-box">
-        <form class="form">
+        <form class="form" method="post" onsubmit=" return signup()">
             <span class="title">Sign up</span>
             <span class="subtitle">create a free account with your email.</span>
             <div class="form-container">
-                <input required type="text" class="input js-name" placeholder="Enter your name" >
-                <input requierd type="email" class="input js-email" placeholder="Email" >
-                <input required type="password" class="input js-pass" placeholder="Password"  >
+                <input type="text" class="input js-name" placeholder="Enter your name" required>
+                <input type="email" class="input js-email" placeholder="Email" required>
+                <input type="password" class="input js-pass" placeholder="Password" required>
             </div>
-            <button onclick="signup();">Sign up</button>
+            <button type='submit'>Sign up</button>
         </form>
         <div class="form-section">
             <p>Have an account? <a href="signin.html">Log in</a></p>
